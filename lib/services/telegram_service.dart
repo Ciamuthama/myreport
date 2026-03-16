@@ -10,7 +10,7 @@ class TelegramService{
   Future<bool> sendDocxReport(File docxFile, String caption) async{
     final url = Uri.parse('https://api.telegram.org/bot$botToken/sendDocument');
 
-    final request = http.MultipartRequest('POST', url);
+    final request = http.MultipartRequest('POST', url)
     ..fields['chat_id'] = chatId
     ..fields['caption'] = caption
     ..files.add(await http.MultipartFile.fromPath(
