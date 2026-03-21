@@ -28,7 +28,7 @@ class DocxServices {
     ..add(TextContent("date", today))
     ..add(TextContent("name", name))
     ..add(TextContent("period_start", periodStart))
-    ..add(TextContent("period_end", today))
+    ..add(TextContent("period_end", periodEnd))
     ..add(TextContent("activities_completed", activitiesCompleted))
     ..add(TextContent("activity_1", activitiesInProcess.isNotEmpty ? activitiesInProcess[0]["tasks"] ?? "" : ""))
     ..add(TextContent("action_1", activitiesInProcess.isNotEmpty ? activitiesInProcess[0]['action'] ?? '' : ''))

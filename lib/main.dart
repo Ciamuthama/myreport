@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:myreport/test/test_docx.dart';
+import 'package:myreport/screens/report_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');  
   runApp(
     MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Docx Generation Test')),
-        body: TestDocx())
+        body: ReportScreeen(),
         )
-  );
+  ));
 }
