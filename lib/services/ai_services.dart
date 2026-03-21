@@ -63,7 +63,7 @@ class AiService {
         'anthropic-version': '2023-06-01',
       },
       body: jsonEncode({
-        'model': 'claude-haiku-4-5', // ✅ correct model string
+        'model': 'claude-haiku-4-5', // correct model string
         'max_tokens': 500,
         'messages': [
           {'role': 'user', 'content': _buildPrompt(rawTasks)}
@@ -76,7 +76,7 @@ class AiService {
       return data['content'][0]['text'].toString().trim();
     }
 
-    // ✅ Print full response body to help debug any future errors
+    // Print full response body to help debug any future errors
     print('Claude error body: ${response.body}');
     throw Exception('Claude error: ${response.statusCode}');
   }

@@ -5,14 +5,14 @@ import '../services/docx_services.dart';
 import '../services/telegram_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class ReportScreeen extends StatefulWidget {
-  const ReportScreeen({super.key});
+class ReportScreen extends StatefulWidget {
+  const ReportScreen({super.key});
 
   @override
-  State<ReportScreeen> createState() => _ReportScreeenState();
+  State<ReportScreen> createState() => _ReportScreeenState();
 }
 
-class _ReportScreeenState extends State<ReportScreeen> {
+class _ReportScreeenState extends State<ReportScreen> {
   final String _claudeApiKey = "";
   final String _ollamaBaseUrl = "";
   final String _ollamaModel = "";
@@ -86,7 +86,7 @@ class _ReportScreeenState extends State<ReportScreeen> {
     try {
       final now = DateTime.now();
       final periodEnd = now;
-      final periodStart = now.subtract(const Duration(days: 15));
+      final periodStart = now.subtract(const Duration(days: 14));
 
       final docxService = DocxServices();
       final file = await docxService.generateReport(
@@ -127,10 +127,10 @@ class _ReportScreeenState extends State<ReportScreeen> {
     
       final success = await telegram.sendDocxReport(file);
       if (success) {
-        _showSnack('✅ Report sent successfully!', Colors.green);
+        _showSnack('Report sent successfully!', Colors.green);
         _clearForm();
       } else {
-        _showSnack('❌ Telegram send failed', Colors.red);
+        _showSnack('Telegram send failed', Colors.red);
       }
     } catch (e) {
       _showSnack("Error generating report: $e", Colors.red);
@@ -209,7 +209,7 @@ class _ReportScreeenState extends State<ReportScreeen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // ── ACTIVITIES COMPLETED ──
-            _sectionHeader('✅ Activities Completed'),
+            _sectionHeader('Activities Completed'),
             const Text(
               'Enter tasks as bullet points, one per line',
               style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -296,7 +296,7 @@ class _ReportScreeenState extends State<ReportScreeen> {
             ],
 
             // ── ACTIVITIES IN PROCESS ──
-            _sectionHeader('🔄 Activities In Process'),
+            _sectionHeader('Activities In Process'),
             Row(
               children: [
                 Expanded(child: _inputField(_activity1Controller, 'Task 1')),
@@ -350,7 +350,7 @@ class _ReportScreeenState extends State<ReportScreeen> {
             ),
 
             // ── ISSUES ──
-            _sectionHeader('🚨 Issues for Immediate Attention'),
+            _sectionHeader('Issues for Immediate Attention'),
             _inputField(
               _issuesController,
               'Any blockers or urgent issues? (leave blank if none)',
