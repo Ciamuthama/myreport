@@ -22,7 +22,7 @@ class _TestDocxState extends State<TestDocx> {
     try {
       final docxService = DocxServices();
       final file = await docxService.generateReport(
-        today: DateTime.now(),
+        today: '17-03-2026',
         name: 'Peter Muthama',
         periodStart: 'Monday, 01 March 2026',
         periodEnd: DateTime.now().toString(),

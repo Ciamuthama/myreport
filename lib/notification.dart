@@ -2,7 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
 class NotificationService {
-  // ── INIT ──────────────────────────────────────────────────
+  //  INIT 
   static Future<void> init() async {
     await AwesomeNotifications().initialize(
       null, // null = use default app icon
@@ -34,7 +34,7 @@ class NotificationService {
     print('NotificationService initialized');
   }
 
-  // ── LISTEN TO PERMISSION CHANGES ─────────────────────────
+  //  LISTEN TO PERMISSION CHANGES 
   static void startListening(BuildContext context) {
     AwesomeNotifications().setListeners(
       onActionReceivedMethod: _onActionReceived,
@@ -44,7 +44,7 @@ class NotificationService {
   @pragma('vm:entry-point')
   static Future<void> _onActionReceived(ReceivedAction action) async {}
 
-  // ── SCHEDULE ALL REMINDERS ────────────────────────────────
+  //  SCHEDULE ALL REMINDERS 
   static Future<void> scheduleReportReminders(DateTime deadline) async {
     await cancelAll();
 
@@ -121,7 +121,7 @@ class NotificationService {
     }
   }
 
-  // ── INSTANT TEST NOTIFICATION ─────────────────────────────
+  //  INSTANT TEST NOTIFICATION 
   static Future<void> showTestNotification() async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
@@ -133,7 +133,7 @@ class NotificationService {
     );
   }
 
-  // ── SCHEDULED TEST — fires in 1 minute ───────────────────
+  //  SCHEDULED TEST — fires in 1 minute 
   static Future<void> scheduleTestNotification() async {
     final testTime = DateTime.now().add(const Duration(minutes: 1));
 
@@ -159,12 +159,12 @@ class NotificationService {
     print('⏰ Test notification scheduled for $testTime');
   }
 
-  // ── CANCEL ALL ────────────────────────────────────────────
+  //  CANCEL ALL 
   static Future<void> cancelAll() async {
     await AwesomeNotifications().cancelAll();
   }
 
-  // ── HELPER ───────────────────────────────────────────────
+  //  HELPER 
   static String _formatDate(DateTime date) {
     const months = [
       'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
