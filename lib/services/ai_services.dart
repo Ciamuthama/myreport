@@ -84,7 +84,7 @@ class AiService {
   String _buildPrompt(String rawTasks) => '''
 You are a professional work report assistant.
 Expand the following bullet points into clear, professional sentences
-suitable for a weekly work report. Keep it concise — 3 to 6 sentences max.
+suitable for a weekly work report. Keep it concise — 2 sentences max.
 Do not use bullet points in your response, write as plain flowing text.
 
 Tasks:

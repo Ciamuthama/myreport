@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myreport/notification.dart';
 import 'package:myreport/screens/report_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:myreport/services/deadline_service.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 Future<void> main() async {
@@ -32,10 +33,7 @@ class ReportBotApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  int _daysUntilDeadline() {
-    final deadline = DateTime(2026, 3, 27);
-    return deadline.difference(DateTime.now()).inDays;
-  }
+  int _daysUntilDeadline() => DeadlineService.daysUntilDeadline();
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +80,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${deadline.day}/${deadline.month}/${deadline.year}',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    DeadlineService.formattedDeadline(),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Container(
@@ -135,12 +136,15 @@ class HomeScreen extends StatelessWidget {
             // Set real reminders
             OutlinedButton.icon(
               onPressed: () async {
-                final deadline = DateTime(2026, 3, 23);
+                final deadline = DeadlineService.getNextDeadline();
                 await NotificationService.scheduleReportReminders(deadline);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Reminders set for March 23!'),
+                  SnackBar(
+                    content: Text(
+                      ' Reminders set for ${DeadlineService.formattedDeadline()}!',
+                    ),
                     backgroundColor: Colors.green,
+                    clipBehavior: Clip.hardEdge,
                   ),
                 );
               },

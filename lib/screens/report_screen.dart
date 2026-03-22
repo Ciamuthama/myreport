@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:myreport/services/deadline_service.dart';
 import '../services/ai_services.dart';
 import '../services/docx_services.dart';
 import '../services/telegram_service.dart';
@@ -52,11 +53,11 @@ class _ReportScreeenState extends State<ReportScreen> {
     setState(() => _isGenerating = true);
 
     try {
-  final ai = AiService(
-  claudeApiKey: dotenv.env['CLAUDE_API_KEY'] ?? '',
-  ollamaBaseUrl: dotenv.env['OLLAMA_BASE_URL'] ?? '',
-  ollamaModel: dotenv.env['OLLAMA_MODEL'] ?? '',
-);
+      final ai = AiService(
+        claudeApiKey: dotenv.env['CLAUDE_API_KEY'] ?? '',
+        ollamaBaseUrl: dotenv.env['OLLAMA_BASE_URL'] ?? '',
+        ollamaModel: dotenv.env['OLLAMA_MODEL'] ?? '',
+      );
 
       final (:result, :usedModel) = await ai.expandActivities(
         _tasksController.text,
@@ -84,13 +85,13 @@ class _ReportScreeenState extends State<ReportScreen> {
     });
 
     try {
-      final now = DateTime.now();
-      final periodEnd = now;
-      final periodStart = now.subtract(const Duration(days: 14));
+      final deadline = DeadlineService.getNextDeadline();
+      final periodEnd = deadline;
+      final periodStart = deadline.subtract(const Duration(days: 14));
 
       final docxService = DocxServices();
       final file = await docxService.generateReport(
-        today: now,
+        today: _formatDate(periodEnd),
         name: "Peter Muthama",
         periodStart: _formatDate(periodStart),
         periodEnd: _formatDate(periodEnd),
@@ -124,7 +125,7 @@ class _ReportScreeenState extends State<ReportScreen> {
         botToken: dotenv.env['TELEGRAM_BOT_TOKEN'] ?? '',
         chatId: dotenv.env['TELEGRAM_CHAT_ID'] ?? '',
       );
-    
+
       final success = await telegram.sendDocxReport(file);
       if (success) {
         _showSnack('Report sent successfully!', Colors.green);

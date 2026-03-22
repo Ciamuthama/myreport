@@ -1,5 +1,6 @@
 import 'dart:io';
 import "package:flutter/services.dart";
+import 'package:myreport/services/deadline_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:cleartec_docx_template/cleartec_docx_template.dart';
 import 'package:intl/intl.dart';
@@ -15,13 +16,14 @@ class DocxServices {
     required List<Map<String, String>> activitiesInProcess,
     required List<Map<String, String>> activitiesPending,
     required String issues,
-     required DateTime today,
+     required String today,
   }) async {
     final data = await rootBundle.load("assets/report_template.docx");
     final bytes = data.buffer.asUint8List();
 
     final docx = await DocxTemplate.fromBytes(bytes);
-    final today = DateFormat("dd/MM/yyyy").format(DateTime.now());
+ final deadline = DeadlineService.getNextDeadline();
+  final date =   deadline;
 
     Content c = Content();
     c
@@ -55,7 +57,7 @@ class DocxServices {
       // Use external storage directory for easier access on device
       final outputDir = await path_provider.getExternalStorageDirectory() ?? 
                         await getApplicationDocumentsDirectory();
-      final fileName = '${DateFormat('dd-MM-yyyy').format(DateTime.now())}_$name.docx';
+      final fileName = '${DateFormat('dd-MM-yyyy').format(date)}_$name.docx';
       final outputFile = File('${outputDir.path}/$fileName');
       await outputFile.writeAsBytes(generatedBytes!);
       return outputFile;
