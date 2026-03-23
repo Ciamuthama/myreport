@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:myreport/notification.dart';
 import 'package:myreport/screens/report_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:myreport/screens/settings_screen.dart';
-import 'package:myreport/services/deadline_service.dart';
-import 'package:myreport/services/settings_service.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 Future<void> main() async {
@@ -36,28 +33,10 @@ class ReportBotApp extends StatelessWidget {
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _checkSetup();
+  int _daysUntilDeadline() {
+    final deadline = DateTime(2026, 3, 27);
+    return deadline.difference(DateTime.now()).inDays;
   }
-
-Future<void> _checkSetup() async {
-  final configured = await SettingsService.isConfigured();
-  if (!configured && mounted) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const SettingsScreen()),
-    );
-  }
-}
-
-  int _daysUntilDeadline() => DeadlineService.daysUntilDeadline();
 
   @override
   Widget build(BuildContext context) {

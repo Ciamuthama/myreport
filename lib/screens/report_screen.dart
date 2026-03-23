@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myreport/services/deadline_service.dart';
-import 'package:myreport/services/settings_service.dart';
 import '../services/ai_services.dart';
 import '../services/docx_services.dart';
 import '../services/telegram_service.dart';
@@ -98,8 +96,12 @@ Future<void> _generateWithAI() async {
 
   setState(() => _isGenerating = true);
 
-  try {
-    final ai = await AiService.fromSettings();
+    try {
+  final ai = AiService(
+  claudeApiKey: dotenv.env['CLAUDE_API_KEY'] ?? '',
+  ollamaBaseUrl: dotenv.env['OLLAMA_BASE_URL'] ?? '',
+  ollamaModel: dotenv.env['OLLAMA_MODEL'] ?? '',
+);
 
     final (:result, :usedModel) =
         await ai.expandActivities(_tasksController.text);
@@ -137,8 +139,8 @@ Future<void> _generateWithAI() async {
 
       final docxService = DocxServices();
       final file = await docxService.generateReport(
-        today: _formatDate(periodEnd),
-        name: _userName.isNotEmpty ? _userName : 'Unknown',
+        today: now,
+        name: "Peter Muthama",
         periodStart: _formatDate(periodStart),
         periodEnd: _formatDate(periodEnd),
         activitiesCompleted: _aiExpandedText,
@@ -171,8 +173,7 @@ Future<void> _generateWithAI() async {
         botToken: _telegramToken,  
         chatId: _telegramChatId,    
       );
-
-   
+    
       final success = await telegram.sendDocxReport(file);
 
       if (success) {
