@@ -133,11 +133,11 @@ Future<void> _generateWithAI() async {
     try {
       final deadline = DeadlineService.getNextDeadline();
       final periodEnd = deadline;
-      final periodStart = deadline.subtract(const Duration(days: 14));
+      final periodStart = deadline.subtract(const Duration(days: 11));
 
       final docxService = DocxServices();
       final file = await docxService.generateReport(
-        today: _formatDate(periodEnd),
+        today:DateFormat('dd-MM-yyyy').format(periodEnd),
         name: _userName.isNotEmpty ? _userName : 'Unknown',
         periodStart: _formatDate(periodStart),
         periodEnd: _formatDate(periodEnd),

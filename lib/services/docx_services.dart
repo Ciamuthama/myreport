@@ -57,7 +57,7 @@ class DocxServices {
       // Use external storage directory for easier access on device
       final outputDir = await path_provider.getExternalStorageDirectory() ?? 
                         await getApplicationDocumentsDirectory();
-      final fileName = '${DateFormat('dd-MM-yyyy').format(date)}_$name.docx';
+      final fileName = '${DateFormat('dd-MM-yyyy').format(date)} $name.docx';
       final outputFile = File('${outputDir.path}/$fileName');
       await outputFile.writeAsBytes(generatedBytes!);
       return outputFile;
