@@ -10,7 +10,7 @@ class AiService {
   AiService({
     this.claudeApiKey = '',
     this.ollamaBaseUrl = 'http://localhost:11434',
-    this.ollamaModel = 'llama3.2',
+    this.ollamaModel = 'qewn3.5:397b',
   });
 
   //  FACTORY — loads from settings automatically 
@@ -20,7 +20,7 @@ class AiService {
       claudeApiKey: settings['claude_api_key'] ?? '',
       ollamaBaseUrl:
           settings['ollama_base_url'] ?? 'http://localhost:11434',
-      ollamaModel: settings['ollama_model'] ?? 'llama3.2',
+      ollamaModel: settings['ollama_model'] ?? 'qewn3.5:397b',
     );
   }
 
@@ -114,7 +114,7 @@ class AiService {
   String _buildPrompt(String rawTasks) => '''
 You are a professional work report assistant.
 Expand the following bullet points into clear, professional sentences
-suitable for a weekly work report. Keep it concise — 3 to 6 sentences max.
+suitable for a weekly work report. Keep it concise — 1 sentences max.
 Do not use bullet points in your response, write as plain flowing text.
 
 Tasks:
