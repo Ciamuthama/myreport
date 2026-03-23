@@ -10,7 +10,7 @@ class AiService {
   AiService({
     this.claudeApiKey = '',
     this.ollamaBaseUrl = 'http://localhost:11434',
-    this.ollamaModel = 'qewn3.5:397b',
+    this.ollamaModel = 'qwen3.5:397b-cloud',
   });
 
   //  FACTORY — loads from settings automatically 

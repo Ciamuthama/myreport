@@ -15,7 +15,7 @@ class SettingsService {
       'ollama_base_url':
           prefs.getString('ollama_base_url') ?? 'http://localhost:11434',
       'ollama_model':
-          prefs.getString('ollama_model') ?? 'llama3.2',
+          prefs.getString('ollama_model') ?? 'qwen3.5:397b-cloud',
       'department':
           prefs.getString('department') ?? 'Software Development',
     };

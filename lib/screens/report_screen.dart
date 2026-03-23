@@ -79,7 +79,7 @@ class _ReportScreenState extends State<ReportScreen> {
       _userName = settings['user_name'] ?? '';
       _department = settings['department'] ?? 'Software Development';
       _ollamaUrl = settings['ollama_base_url'] ?? 'http://localhost:11434';
-      _ollamaModel = settings['ollama_model'] ?? 'llama3.2';
+      _ollamaModel = settings['ollama_model'] ?? 'qwen3.5:397b-cloud';
       _settingsLoaded = true;
     });
   }

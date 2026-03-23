@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:myreport/notification.dart';
 import 'package:myreport/screens/report_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:myreport/screens/settings_screen.dart';
 import 'package:myreport/services/deadline_service.dart';
 import 'package:myreport/services/settings_service.dart';
-import 'package:timezone/timezone.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +23,7 @@ class ReportBotApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 255, 187)),
         useMaterial3: true,
       ),
       home: const HomeScreen(),
@@ -69,8 +67,8 @@ Future<void> _checkSetup() async {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text('ReportBot'),
-        backgroundColor: Colors.orange,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         actions: [
           IconButton(
@@ -127,7 +125,7 @@ Future<void> _checkSetup() async {
                     ),
                     decoration: BoxDecoration(
                       color: isUrgent ? Colors.red : Colors.orange,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(100),
                     ),
                     child: Text(
                       daysLeft <= 0 ? 'DUE TODAY!' : '$daysLeft days left',
@@ -159,7 +157,7 @@ Future<void> _checkSetup() async {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(100),
                 ),
               ),
             ),

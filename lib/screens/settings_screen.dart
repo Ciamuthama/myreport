@@ -57,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _ollamaUrlController.text =
           prefs.getString('ollama_base_url') ?? 'http://localhost:11434';
       _ollamaModelController.text =
-          prefs.getString('ollama_model') ?? 'llama3.2';
+          prefs.getString('ollama_model') ?? 'qwen3.5:397b-cloud';
       _departmentController.text =
           prefs.getString('department') ?? 'Software Development';
       _isLoading = false;

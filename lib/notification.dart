@@ -141,7 +141,7 @@ class NotificationService {
       content: NotificationContent(
         id: 98,
         channelKey: 'report_reminders',
-        title: '⏰ Scheduled Test',
+        title: 'Scheduled Test',
         body: 'Scheduled notifications are working!',
       ),
       schedule: NotificationCalendar(
@@ -156,7 +156,7 @@ class NotificationService {
       ),
     );
 
-    print('⏰ Test notification scheduled for $testTime');
+    print('Test notification scheduled for $testTime');
   }
 
   //  CANCEL ALL 
