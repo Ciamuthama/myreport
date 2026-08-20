@@ -53,7 +53,7 @@ class AiService {
     }
 
     //  CLAUDE FALLBACK 
-    if (claudeApiKey.isEmpty) {
+    if (ollamaBaseUrl.isEmpty) {
       throw Exception(
         'Ollama is unavailable and no Claude API key is configured. '
         'Please add your Claude API key in Settings.',
