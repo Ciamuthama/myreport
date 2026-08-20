@@ -8,7 +8,7 @@ import 'package:myreport/services/settings_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+ 
   await NotificationService.init();
   runApp(const ReportBotApp());
 }
