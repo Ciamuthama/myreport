@@ -33,20 +33,25 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
+     
+      - name: Rename APK File
+        run: |
+          mkdir -p build/output_release
+          cp build/app/outputs/flutter-apk/app-release.apk build/output_release/myreport-v${{ github.run_number }}.apk
+
       - name: Upload APK to Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/output_release/myreport-v${{ github.run_number }}.apk
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
-        # 💡 REMOVED THE 'IF' TAG CONDITION TO FORCE IT TO RUN ON PUSH
         with:
-          tag_name: "latest" # Updates the same release each time or use a dynamic variable
-          name: "Latest Release"
+          tag_name: "v${{ github.run_number }}"
+          name: "myreport Release v${{ github.run_number }}"
           draft: false
           prerelease: false
-          files: build/app/outputs/flutter-apk/app-release.apk
+          files: build/output_release/myreport-v${{ github.run_number }}.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

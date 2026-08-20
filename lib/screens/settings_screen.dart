@@ -55,9 +55,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _telegramChatIdController.text =
           prefs.getString('telegram_chat_id') ?? '';
       _ollamaUrlController.text =
-          prefs.getString('ollama_base_url') ?? 'http://localhost:11434';
+          prefs.getString('ollama_base_url') ?? 'http://10.147.19.144:11434';
       _ollamaModelController.text =
-          prefs.getString('ollama_model') ?? 'qwen3.5:397b-cloud';
+          prefs.getString('ollama_model') ?? 'gemma4:31b-cloud';
       _departmentController.text =
           prefs.getString('department') ?? 'Software Development';
       _isLoading = false;
