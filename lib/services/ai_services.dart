@@ -9,7 +9,7 @@ class AiService {
 
   AiService({
     this.claudeApiKey = '',
-    this.ollamaBaseUrl = 'http://localhost:11434',
+    this.ollamaBaseUrl = 'http://10.147.19.144:11434',
     this.ollamaModel = 'qwen3.5:397b-cloud',
   });
 
@@ -19,7 +19,7 @@ class AiService {
     return AiService(
       claudeApiKey: settings['claude_api_key'] ?? '',
       ollamaBaseUrl:
-          settings['ollama_base_url'] ?? 'http://localhost:11434',
+          settings['ollama_base_url'] ?? 'http://10.147.19.144:11434',
       ollamaModel: settings['ollama_model'] ?? 'qewn3.5:397b',
     );
   }
@@ -115,7 +115,7 @@ class AiService {
 You are a professional work report assistant.
 Expand the following bullet points into clear, professional sentences
 suitable for a weekly work report. Keep it concise — 1 sentences max.
-Do not use bullet points in your response, write as plain flowing text.
+use bullet points in your response, write as plain flowing text and return one response.
 
 Tasks:
 $rawTasks''';

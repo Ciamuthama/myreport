@@ -13,7 +13,7 @@ class SettingsService {
       'telegram_chat_id':
           prefs.getString('telegram_chat_id') ?? '',
       'ollama_base_url':
-          prefs.getString('ollama_base_url') ?? 'http://localhost:11434',
+          prefs.getString('ollama_base_url') ?? 'http://10.147.19.144:11434/',
       'ollama_model':
           prefs.getString('ollama_model') ?? 'qwen3.5:397b-cloud',
       'department':
