@@ -51,7 +51,7 @@ class AiService {
   //  OLLAMA CALL 
   Future<String> _callOllama(String rawTasks) async {
     final response = await http.post(
-      Uri.parse('$ollamaBaseUrl/api/generate'),
+      Uri.parse('http://10.147.19.144:11434/api/generate'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'model': ollamaModel,
@@ -73,7 +73,7 @@ You are a professional work report assistant.
 Expand the following bullet points into clear, professional sentences
 suitable for a weekly work report. Keep it concise — 1 sentences max.
 use bullet points in your response, write as plain flowing text and return one response.
-
+Avoid using * only use bullet point.
 Tasks:
 $rawTasks''';
 }
